@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: date
         run: |
-          a=$date
+          a=$(date)
           echo "Date is $a"
   windows:
     runs-on: windows-latest
