@@ -12,7 +12,7 @@ jobs:
         run: |
           if command -v node &> /dev/null; then
           a=$(node -v)
-          echo "installed version is: $a" >> $GITHUB_ENV
+          echo "Node_Version=$a" >> $GITHUB_ENV
           else
           echo " nodeJs is not installed"
           fi
