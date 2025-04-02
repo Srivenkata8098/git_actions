@@ -17,12 +17,20 @@ jobs:
           echo " nodeJs is not installed"
           fi
 
-      - uses: actions/checkout@v4    #this for running npm test as it downloads the repo which has it dependencies for running npm test
+      - uses: actions/checkout@v4    
       - name: installing latest version
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-      - run: npm ci
+      - run: |
+          echo "checking lock file is installed or not"
+          ls -la
+          ls -la package-lock.json
+          if [ -f package-lock.json ]; then
+          npm ci
+          else
+          npm install 
+          fi
       - run: npm test
           
         
