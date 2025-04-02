@@ -8,6 +8,7 @@ jobs:
         run: |
           if command -v node &> /dev/null; then
           echo $?
+          fi
       - name: installation checking
         run: |
           if command -v node &> /dev/null; then
