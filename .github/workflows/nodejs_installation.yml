@@ -13,8 +13,9 @@ jobs:
           if command -v node &> /dev/null; then
           a=$(node -v)
           echo "installed version is: $a" >> $GITHUB_ENV
-          else:
+          else
           echo " nodeJs is not installed"
+          fi
 
       - uses: actions/checkout@v4    #this for running npm test as it downloads the repo which has it dependencies for running npm test
       - name: installing latest version
