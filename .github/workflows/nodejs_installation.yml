@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: checking the exitcode
         run: |
-          command -v node &> /dev/null; then
+          command -v node &> /dev/null
           echo "$?"
       - name: cheking installation
         run: |
