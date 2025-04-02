@@ -1,0 +1,16 @@
+name: date
+on: push
+jobs: 
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: date
+        run: |
+          a=$date
+          echo "Date is $a"
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: date
+        run: Get-date
+          
