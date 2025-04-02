@@ -1,37 +1,47 @@
-name: installation
+name: npm_installation
 on: push
-jobs: 
-  npm_ubuntu:
+jobs:
+  npm_checking:
     runs-on: ubuntu-latest
     steps:
-      - name: checking the exitcode
+      - name: exit code checking
         run: |
-          command -v node &> /dev/null
-          echo "$?"
-      - name: cheking installation
+          if command -v node &> /dev/null; then
+          echo $?
+      - name: installation checking
         run: |
           if command -v node &> /dev/null; then
           a=$(node -v)
-          echo "Node_Version=$a" >> $GITHUB_ENV
+          echo "Node_Version=$a" >> GITHUB_ENV
+          echo " The node.js installed version is $a"
           else
-          echo " nodeJs is not installed"
+          echo "node.js is not installed"
           fi
-
-      - uses: actions/checkout@v4    
-      - name: installing latest version
+  npm_install:
+    needs: npm_checking
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: npm installation
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-      - run: |
-          echo "checking lock file is installed or not"
-          #ls -la
-          #ls -la package-lock.json
-          if [ -f package-lock.json ]; then
-          npm ci
+          node-version: "lts/*"
+
+      - name: updating npm
+        run: |
+          present_npm_ver=$(npm -v)
+          required_npm_version=$(npm show npm version)
+          if [ "$present_npm_ver"!="$required_npm_version" ]; then
+          echo "updating npm to latest version..."
+          npm install -g npm@$required_npm_version
+          echo "the npm version is $(npm -v)"
+
           else
-          npm install 
+          echo "npm is at his latest version"
           fi
-      - run: npm test
+          
+
           
         
           
