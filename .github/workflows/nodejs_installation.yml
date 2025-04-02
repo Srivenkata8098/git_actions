@@ -10,7 +10,7 @@ jobs:
           echo "$?"
       - name: cheking installation
         run: |
-          if command -v node $> /dev/null; then
+          if command -v node &> /dev/null; then
           a=$(node -v)
           echo "installed version is: $a" >> $GITHUB_ENV
           else:
