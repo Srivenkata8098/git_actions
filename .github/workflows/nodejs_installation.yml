@@ -1,0 +1,28 @@
+name: installation
+on: push
+jobs: 
+  npm_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking the exitcode
+        run: |
+          command -v node &> /dev/null; then
+          echo "$?"
+      - name: cheking installation
+        run: |
+          if command -v node $> /dev/null; then
+          a=$(node -v)
+          echo "installed version is: $a" >> $GITHUB_ENV
+          else:
+          echo " nodeJs is not installed"
+
+      - uses: actions/checkout@v4    #this for running npm test as it downloads the repo which has it dependencies for running npm test
+      - name: installing latest version
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - run: npm ci
+      - run: npm test
+          
+        
+          
