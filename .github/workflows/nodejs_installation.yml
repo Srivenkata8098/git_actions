@@ -24,7 +24,7 @@ jobs:
           node-version: 'lts/*'
       - run: |
           echo "checking lock file is installed or not"
-          ls -la
+          #ls -la
           #ls -la package-lock.json
           if [ -f package-lock.json ]; then
           npm ci
