@@ -1,0 +1,21 @@
+name: triggers
+on: 
+  pull_request: 
+    branches:
+      main
+  push:
+    branches:
+      new
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: chekout code
+        uses: actions/checkout@v4
+      - name: installing npm
+        run: |
+          npm ci
+          a=$(npm -v)
+          echo "installed version is : $a"
+          
+  
