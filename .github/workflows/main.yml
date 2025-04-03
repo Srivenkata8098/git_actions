@@ -1,0 +1,24 @@
+name: multiple events with filters
+on:
+  pull_request:
+    branches:
+      main
+  push:    
+jobs:
+  installation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code installation on runner
+        uses: actions/checkout@v4
+      - name: npm installation
+        uses: actions/setup-node@v4
+      - name: if package is not installed
+        run: |
+          if [ -f package-lock.json ]; then
+          npm ci
+          else
+          echo "package is not installed"
+          fi
+      - name: npm build
+        run: echo $(npm -v)
+          
